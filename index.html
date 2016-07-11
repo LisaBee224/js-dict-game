@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/js.js"></script>
+  <title>
+</title>
+</head>
+<body>
+
+  <form id="userGuess">
+    <input type="text" id="guess">
+
+  </input>
+
+  <div id="before">
+    <p id="prompt">your guess is after</p>
+    <p></p>
+  </div>
+  <div id="before">
+    <p id="prompt">your guess is before</p>
+    <p></p>
+  </div>
+  <div>
+    <p></p>
+  </div>
+  <input type="submit" onclick="sortGuess();"></input>
+  </form>
+<button id="click" onclick="RandomWord();">click to start</button>
+
+<script>
+var WordtoGuess =""
+    function RandomWord() {
+        var requestStr = "http://randomword.setgetgo.com/get.php";
+        $.ajax({
+            type: "GET",
+            url: requestStr,
+            dataType: "jsonp",
+            jsonpCallback: 'RandomWordComplete'
+
+        });
+    }
+
+    function RandomWordComplete(data) {
+        alert(data.Word);
+        WordToGuess = data.Word;
+    }
+
+    function sortGuess(){
+      var guess = $('#guess').val();
+      if(guess > WordToGuess){
+        $("#before").child().html(guess);
+
+      }else if(guess < WordToGuess){
+        $("#after").child().html(guess);
+
+      }
+       debugger;
+    }
+</script>
+</body>
+</html>
